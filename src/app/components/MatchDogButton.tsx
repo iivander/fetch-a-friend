@@ -54,7 +54,7 @@ const MatchModal = ({ modalId, data }: MatchModalProps) => {
 
                         <p id="match-modal-description" className="mt-4 text-lg text-gray-700">
                             <strong>{data.name}</strong> is a lovable <span className="font-medium">{data.breed}</span> looking for a warm home.
-                            This adorable pup is ready to be your lifelong companion! 🐶💙
+                            This adorable pup is ready to be your lifelong companion!
                         </p>
                     </section>
                     <div className="modal-action flex justify-center">
