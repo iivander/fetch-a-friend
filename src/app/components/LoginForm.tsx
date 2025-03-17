@@ -31,9 +31,14 @@ const LoginForm = () => {
         }
     };
 
-    // Add some sort of background image of dogs...?
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-blue-200">
+            <div
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: "url('/login-pic.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/50"></div>
+
             <div className="card w-80 p-6 bg-white shadow-md text-gray-800">
                 <h1 className="text-xl font-bold mb-4 text-center" aria-labelledby="login-title">
                     Sign In

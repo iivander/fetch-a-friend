@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🐶 Fetch A Friend - Dog Matching App
 
-## Getting Started
+Fetch A Friend is a **Next.js** application that provides a seamless authentication experience using **NextAuth.js**. Additionally, users can browse and filter different dog breeds with sorting and pagination.
 
-First, run the development server:
+## ✨ Features
+- 🛡 **Authentication** using NextAuth.js
+- 🔒 **Protected Routes** (Redirection for unauthorized users)
+- 🎨 **Login UI** with a background image
+- 📄 **Server-side session handling**
+- 🚀 **Deployed on Vercel**
+- 🐕 **Dog Breed Filtering** - Users can filter results by breed
+- 📑 **Pagination Support** - Results are paginated for better performance
+- 🔤 **Alphabetical Sorting** - Breeds are sorted **A-Z by default**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🛠️ Tech Stack
+- **Next.js 14** (App Router)
+- **TypeScript**
+- **NextAuth.js** (Authentication)
+- **Tailwind CSS** (Styling)
+- **Vercel** (Deployment)
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/your-username/fetch-a-friend.git
+cd fetch-a-friend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install Dependencies
+```sh
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3️⃣ Set Up Environment Variables
+Create a .env.local file and add the required environment variables:
+```sh
+AUTH_SECRET=your-generated-secret-key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+If you need an AUTH_SECRET, generate one with:
+```sh
+openssl rand -base64 32
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🔑 Logging In
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### The app supports email-based login with credentials.
+```
+1. Enter your name and email on the login form.
+2. Click Sign In.
+3. If valid, you will be redirected to /main.
+4. If authentication fails, an error message will appear.
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🐶 Browsing Dog Breeds
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Once authenticated, users can:
+```
+• Filter breeds based on search criteria.
+• Paginate results to navigate easily.
+• Sort breeds alphabetically (A-Z by default).
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🔐 Protected Routes
+```
+• Users must be logged in to access certain pages.
+• If a user is not authenticated, they will be redirected to the login page.
+```
+
+---
+
+## 🔄 Follow-Up Work
+
+### Future improvements planned for the project:
+```
+• Favorite any dogs to get a match.
+• Expanding Test Coverage – Improve test suite coverage for better reliability.
+• Filter by Location/Zip Code – Allow users to filter dog breeds by location.
+• Refine Pagination UX – Keep pagination layout consistent and handle edge cases.
+• Implement Token Refreshing – Add functionality to refresh authentication tokens.
+
+```
