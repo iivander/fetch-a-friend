@@ -38,3 +38,7 @@ export interface PaginationProps {
     totalDogs: number;
     currentPage: number;
 }
+
+export interface ModalProps {
+    modalId: string;
+}

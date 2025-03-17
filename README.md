@@ -11,6 +11,7 @@ Fetch A Friend is a **Next.js** application that provides a seamless authenticat
 - 🐕 **Dog Breed Filtering** - Users can filter results by breed
 - 📑 **Pagination Support** - Results are paginated for better performance
 - 🔤 **Alphabetical Sorting** - Breeds are sorted **A-Z by default**
+- ❤️ **Save Favorite Dogs** - Users can favorite dogs for matching
 
 ---
 
@@ -19,6 +20,7 @@ Fetch A Friend is a **Next.js** application that provides a seamless authenticat
 - **TypeScript**
 - **NextAuth.js** (Authentication)
 - **Tailwind CSS** (Styling)
+- **PostgreSQL (NeonDB)** - Database
 - **Vercel** (Deployment)
 
 ---
@@ -40,12 +42,19 @@ npm install
 Create a .env.local file and add the required environment variables:
 ```sh
 AUTH_SECRET=your-generated-secret-key
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
 If you need an AUTH_SECRET, generate one with:
 ```sh
 openssl rand -base64 32
 ```
+
+### 4️⃣ Pull Environment Variables from Vercel
+```sh
+vercel env pull .env.local
+```
+After successfully pull the `.env.local` file, update NEXT_PUBLIC_BASE_URL value to be http://localhost:3000
 
 ---
 
@@ -68,6 +77,23 @@ openssl rand -base64 32
 • Filter breeds based on search criteria.
 • Paginate results to navigate easily.
 • Sort breeds alphabetically (A-Z by default).
+• Favorite multiple dogs and generate a match.
+```
+---
+
+## 🛢️ Using PostgreSQL as the Database
+
+This project uses PostgreSQL (hosted on Neon) as the database backend. It stores user favorites and dog breed information.
+###  Database Schema
+The database consists of the following tables:
+- Favorite Table
+```sh
+CREATE TABLE IF NOT EXISTS favorite (
+    id SERIAL PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    dog_id TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
 ---
@@ -84,10 +110,11 @@ openssl rand -base64 32
 
 ### Future improvements planned for the project:
 ```
-• Favorite any dogs to get a match.
 • Expanding Test Coverage – Improve test suite coverage for better reliability.
 • Filter by Location/Zip Code – Allow users to filter dog breeds by location.
 • Refine Pagination UX – Keep pagination layout consistent and handle edge cases.
 • Implement Token Refreshing – Add functionality to refresh authentication tokens.
-
+• Better error handling from server (global snackbar notifying user of any errors)
+• Adding a Favorite page where user can see all the Dogs that they have favorited.
+• Improved “Generate a Match” functionality and button placement. (Due to time constraints, the button was temporarily positioned at the top of the page.)
 ```

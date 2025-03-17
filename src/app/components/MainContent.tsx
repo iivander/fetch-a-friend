@@ -1,13 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { getDogLists } from "@/lib/api";
 import Pagination from "@/app/components/Pagination";
 import DogCard, { DogCardSkeleton } from "@/app/components/DogCard";
 import { Dog } from "@/lib/types";
 import SortDropdown, { SORT_OPTIONS } from "@/app/components/SortDropdown";
 import FiltersModal from "@/app/components/FiltersModal";
+import MatchDogButton from "@/app/components/MatchDogButton";
+import { useFetchDogs } from "@/app/hooks/useFetchDogs";
+import { useFetchFavorites } from "@/app/hooks/useFetchFavorites";
 
 const DEFAULT_PAGE = 1;
 
@@ -24,41 +25,22 @@ const MainContent = () => {
         ? Number(searchParams.get("ageMax"))
         : undefined;
 
-    const [dogs, setDogs] = useState<Dog[]>([]);
-    const [totalDogs, setTotalDogs] = useState<number>(0);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { dogs, totalDogs, isLoading } = useFetchDogs({ currentPage, sort, breeds, ageMin, ageMax });
+    const { favoriteDogIds, handleDogFavoriteClick } = useFetchFavorites();
 
-    useEffect(() => {
-        setIsLoading(true);
-
-        const fetchDogs = async () => {
-            const response = await getDogLists({ currentPage, sort, breeds, ageMin, ageMax });
-            if (!response) {
-                setDogs([]);
-                setTotalDogs(0);
-            } else {
-                setDogs(response.data);
-                setTotalDogs(Number(response.total));
-            }
-            setIsLoading(false);
-        };
-
-        fetchDogs();
-    }, [currentPage, sort, breeds, ageMin, ageMax]);
-
-    const handleModalOpen = () => {
-        const modal = document.getElementById("filtersDropdown") as HTMLDialogElement | null;
+    const handleFilterModalOpen = () => {
+        const modal = document.getElementById("filtersModal") as HTMLDialogElement | null;
         if (modal) {
             modal.showModal();
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-between min-h-screen bg-orange-50 mt-16 pt-4">
+        <div className="flex flex-col items-center justify-between min-h-screen bg-orange-50 mt-16 pt-4 relative">
             <div className="flex flex-row items-center justify-between w-full px-2">
                 <button
                     className="btn btn-ghost"
-                    onClick={handleModalOpen}
+                    onClick={handleFilterModalOpen}
                     aria-label="Open filters modal"
                 >
                     Filters
@@ -66,9 +48,9 @@ const MainContent = () => {
                 <SortDropdown />
             </div>
 
-            <FiltersModal modalId="filtersDropdown" />
+            <FiltersModal modalId="filtersModal" />
             <div
-                className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-6 w-full px-4"
+                className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-1 sm:mt-6 mt-12 w-full px-4"
                 aria-live="polite"
                 aria-busy={isLoading}
             >
@@ -92,12 +74,17 @@ const MainContent = () => {
                                   exit={{ opacity: 0 }}
                                   transition={{ duration: 0.3 }}
                               >
-                                  <DogCard {...dog} />
+                                  <DogCard
+                                      {...dog}
+                                      isFavorite={favoriteDogIds.includes(dog.id)}
+                                      onFavoriteClick={() => handleDogFavoriteClick(dog.id)}
+                                  />
                               </motion.div>
                           ))}
                 </AnimatePresence>
             </div>
             <Pagination totalDogs={totalDogs} currentPage={currentPage} />
+            <MatchDogButton favoriteDogIds={favoriteDogIds} />
         </div>
     );
 };

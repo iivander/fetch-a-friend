@@ -32,7 +32,7 @@ describe("SortDropdown Component", () => {
         fireEvent.change(select, { target: { value: SORT_OPTIONS[2].value } });
 
         expect(mockReplace).toHaveBeenCalledWith(
-            expect.stringContaining(`sort=${encodeURIComponent(SORT_OPTIONS[2].value)}`), // ✅ Fix by encoding the expected value
+            expect.stringContaining(`sort=${encodeURIComponent(SORT_OPTIONS[2].value)}`),
             { scroll: false }
         );
     });

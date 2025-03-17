@@ -5,16 +5,13 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { MultiValue } from "react-select";
 import { getDogBreeds } from "@/lib/api";
 import dynamic from "next/dynamic";
+import { ModalProps } from "@/lib/types";
 
 // Dynamic import for React-Select due to SSR issues
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
-interface FiltersModalProps {
-    modalId: string;
-}
-
 // TODO: add Zip Code / Location filters
-const FiltersModal = ({ modalId }: FiltersModalProps) => {
+const FiltersModal = ({ modalId }: ModalProps) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -92,9 +89,9 @@ const FiltersModal = ({ modalId }: FiltersModalProps) => {
     return (
         <dialog id={modalId} className="modal modal-bottom sm:modal-middle" aria-modal="true">
             <form className="modal-box" onSubmit={handleSubmit}>
-                <h3 className="font-bold text-lg" aria-labelledby="modal-title">
+                <span className="font-bold text-lg" aria-labelledby="modal-title">
                     Filter Options
-                </h3>
+                </span>
                 <div className="py-4 space-y-4 text-sm text-gray-700">
                     <label className="block">
                         Breed:
