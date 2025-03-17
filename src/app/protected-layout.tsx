@@ -1,13 +1,17 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
-// Reusable component to redirect any page to login if not logged in (only to be used with server component)
-export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
+interface ProtectedLayoutProps {
+    children: React.ReactNode;
+}
+
+// Reusable component to protect server-side routes by redirecting to login if the user is not authenticated
+export default async function ProtectedLayout({ children }: ProtectedLayoutProps) {
     const session = await auth();
 
-    if (!session) {
+    if (!session || new Date(session.expires) < new Date()) {
         redirect("/login");
     }
 
-    return <>{children}</>;
+    return children;
 }
