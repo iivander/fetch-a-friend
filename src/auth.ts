@@ -4,7 +4,6 @@ import { JWT } from "next-auth/jwt";
 import { Session } from "next-auth";
 import { cookies } from "next/headers";
 
-// TODO: clean up
 export const { auth, handlers, signIn, signOut } = NextAuth({
     providers: [
         CredentialsProvider({
@@ -47,7 +46,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
                     (await cookies()).set("auth_token", rawCookies, { path: "/", httpOnly: true });
                     return {
-                        id: credentials.email as string, // Since no ID is provided, use email as ID
+                        id: credentials.email as string,
                         email: credentials.email as string,
                         name: credentials.name as string,
                     };
@@ -83,5 +82,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return session;
         },
     },
-    secret: '',
+    secret: process.env.AUTH_SECRET,
 });
