@@ -13,6 +13,7 @@ Fetch A Friend is a **Next.js** application that provides a seamless authenticat
 - **Pagination Support** - Results are paginated for better performance
 - **Alphabetical Sorting** - Breeds are sorted **A-Z by default**
 - **Save Favorite Dogs** - Users can favorite dogs for matching
+- **Limited Support for Dark Mode** - when User switches system theme
 - **Mobile Responsive**
 
 ## 🔄 Follow-Up Work
