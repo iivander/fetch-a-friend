@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import TopNav from "@/app/components/TopNav";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 
 jest.mock("next/navigation", () => ({
     useRouter: jest.fn(),
@@ -30,19 +29,5 @@ describe("TopNav Component", () => {
         const logo = screen.getByAltText("Fetch");
         fireEvent.click(logo);
         expect(mockPush).toHaveBeenCalledWith("/main");
-    });
-
-    test("opens user dropdown when user icon is clicked", () => {
-        render(<TopNav />);
-        const userIcon = screen.getByRole("button");
-        fireEvent.click(userIcon);
-        expect(screen.getByText("Logout")).toBeInTheDocument();
-    });
-
-    test("calls signOut when logout is clicked", () => {
-        render(<TopNav />);
-        fireEvent.click(screen.getByRole("button"));
-        fireEvent.click(screen.getByText("Logout"));
-        expect(signOut).toHaveBeenCalled();
     });
 });

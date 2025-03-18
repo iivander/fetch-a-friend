@@ -41,40 +41,47 @@ const FavoritesContent = () => {
                 </button>
             </div>
             <MatchModal data={matchedDog} modalId="matchModal" />
-            <div
-                className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-1 mt-6 w-full px-4"
-                aria-live="polite"
-                aria-busy={isLoading}
-            >
-                <AnimatePresence mode="popLayout">
-                    {isLoading
-                        ? [...Array(10)].map((_, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <DogCardSkeleton />
-                            </motion.div>
-                        ))
-                        : dogs?.map((dog: Dog) => (
-                            <motion.div
-                                key={dog.id}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                <DogCard
-                                    {...dog}
-                                    isFavorite={favoriteDogIds.includes(dog.id)}
-                                    onFavoriteClick={() => handleDogFavoriteClick(dog.id)}
-                                />
-                            </motion.div>
-                        ))}
-                </AnimatePresence>
-            </div>
+            {!isLoading && dogs.length === 0 && (
+                <p className="text-center text-gray-600 col-span-full mt-4">
+                    No favorite dogs found. Start adding some!
+                </p>
+            )}
+            {isLoading || dogs.length > 0 && (
+                <div
+                    className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-1 mt-6 w-full px-4"
+                    aria-live="polite"
+                    aria-busy={isLoading}
+                >
+                    <AnimatePresence mode="popLayout">
+                        {isLoading
+                            ? [...Array(10)].map((_, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <DogCardSkeleton />
+                                </motion.div>
+                            ))
+                            : dogs?.map((dog: Dog) => (
+                                <motion.div
+                                    key={dog.id}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <DogCard
+                                        {...dog}
+                                        isFavorite={favoriteDogIds.includes(dog.id)}
+                                        onFavoriteClick={() => handleDogFavoriteClick(dog.id)}
+                                    />
+                                </motion.div>
+                            ))}
+                    </AnimatePresence>
+                </div>
+            )}
         </div>
     );
 }

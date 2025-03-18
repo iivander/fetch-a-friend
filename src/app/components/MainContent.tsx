@@ -41,7 +41,7 @@ const MainContent = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-between min-h-screen bg-orange-50 mt-16 pt-4 relative">
+        <div className="flex flex-col items-center min-h-screen bg-orange-50 mt-16 pt-4 relative">
             <div className="flex flex-row items-center justify-between w-full px-2">
                 <button
                     className="btn btn-ghost dark:text-gray-800 dark:hover:text-white transition-all duration-300"
@@ -62,30 +62,29 @@ const MainContent = () => {
                 <AnimatePresence mode="popLayout">
                     {isLoading
                         ? [...Array(25)].map((_, index) => (
-                              <motion.div
-                                  key={index}
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  transition={{ duration: 0.3 }}
-                              >
-                                  <DogCardSkeleton />
-                              </motion.div>
-                          ))
-                        : dogs?.map((dog: Dog) => (
-                              <motion.div
-                                  key={dog.id}
-                                  initial={{ opacity: 0 }}
-                                  animate={{ opacity: 1 }}
-                                  exit={{ opacity: 0 }}
-                                  transition={{ duration: 0.3 }}
-                              >
-                                  <DogCard
-                                      {...dog}
-                                      isFavorite={favoriteDogIds.includes(dog.id)}
-                                      onFavoriteClick={() => handleDogFavoriteClick(dog.id)}
-                                  />
-                              </motion.div>
-                          ))}
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <DogCardSkeleton />
+                            </motion.div>
+                        )) : dogs?.map((dog: Dog) => (
+                            <motion.div
+                                key={dog.id}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <DogCard
+                                    {...dog}
+                                    isFavorite={favoriteDogIds.includes(dog.id)}
+                                    onFavoriteClick={() => handleDogFavoriteClick(dog.id)}
+                                />
+                            </motion.div>
+                        ))}
                 </AnimatePresence>
             </div>
             <Pagination totalDogs={totalDogs} currentPage={currentPage} />

@@ -28,6 +28,7 @@ Fetch A Friend is a **Next.js** application that provides a seamless authenticat
 • Better error handling from server (global snackbar notifying user of any errors)
 • Adding Sort & Pagination to Favorite Page.
 • Enhancing text and background styling for better Dark Mode readability.
+• Better handling of Log Out when session expires.
 ```
 
 ---
