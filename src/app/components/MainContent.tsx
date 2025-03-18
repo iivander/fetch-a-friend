@@ -41,7 +41,7 @@ const MainContent = () => {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-orange-50 mt-16 pt-4 relative">
+        <div className="flex flex-col items-center justify-between min-h-screen bg-orange-50 mt-16 pt-4 relative">
             <div className="flex flex-row items-center justify-between w-full px-2">
                 <button
                     className="btn btn-ghost dark:text-gray-800 dark:hover:text-white transition-all duration-300"
