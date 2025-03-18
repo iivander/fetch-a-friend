@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import {deleteFavoriteDog, fetchFavoritedDog, setFavoriteDog} from "@/lib/api";
+import { deleteFavoriteDog, fetchFavoritedDog, setFavoriteDog } from "@/lib/api";
 
 export function useFetchFavorites() {
     const { data: session } = useSession();

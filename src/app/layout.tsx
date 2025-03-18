@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { Suspense } from 'react'
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,8 +28,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <SessionProvider>{children}</SessionProvider>
-                <Analytics />
+                <Suspense>
+                    <SessionProvider>{children}</SessionProvider>
+                    <Analytics />
+                </Suspense>
             </body>
         </html>
     );

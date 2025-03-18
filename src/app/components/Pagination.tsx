@@ -12,7 +12,7 @@ const MAX_PAGE_DISPLAY = 3;
 
 const PreviousButton = ({ onClick, disabled }: ButtonProps) => (
     <button
-        className="join-item btn btn-square btn-ghost mx-1"
+        className="join-item btn btn-square btn-ghost mx-1 dark:text-gray-800 dark:hover:text-white"
         onClick={onClick}
         disabled={disabled}
     >
@@ -22,7 +22,7 @@ const PreviousButton = ({ onClick, disabled }: ButtonProps) => (
 
 const NextButton = ({ onClick, disabled }: ButtonProps) => (
     <button
-        className="join-item btn btn-square btn-ghost mx-1"
+        className="join-item btn btn-square btn-ghost mx-1 dark:text-gray-800 dark:hover:text-white"
         onClick={onClick}
         disabled={disabled}
     >
@@ -31,13 +31,13 @@ const NextButton = ({ onClick, disabled }: ButtonProps) => (
 );
 
 const PageSpreadButton = () => (
-    <button className="join-item btn btn-square btn-ghost btn-disabled">...</button>
+    <button className="join-item btn btn-square btn-ghost btn-disabled dark:text-gray-800">...</button>
 );
 
 const PageButton = ({ onClick, active, value }: ButtonProps) => (
     <button
-        className={classNames("join-item btn btn-square btn-ghost rounded-sm mx-1", {
-            "btn-active": active,
+        className={classNames("join-item btn btn-square btn-ghost rounded-sm mx-1 dark:text-gray-800 dark:hover:text-white", {
+            "btn-active dark:text-white": active,
         })}
         onClick={onClick}
     >

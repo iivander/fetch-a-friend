@@ -88,7 +88,7 @@ const FiltersModal = ({ modalId }: ModalProps) => {
 
     return (
         <dialog id={modalId} className="modal modal-bottom sm:modal-middle" aria-modal="true">
-            <form className="modal-box" onSubmit={handleSubmit}>
+            <form className="modal-box bg-white text-gray-800" onSubmit={handleSubmit}>
                 <span className="font-bold text-lg" aria-labelledby="modal-title">
                     Filter Options
                 </span>
@@ -114,7 +114,7 @@ const FiltersModal = ({ modalId }: ModalProps) => {
                             name="ageMin"
                             value={ageMin}
                             onChange={(e) => setAgeMin(e.target.value)}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-white dark:text-gray-900 dark:border-gray-600"
                             min={0}
                             placeholder="Minimum age"
                             aria-label="Minimum age"
@@ -127,7 +127,7 @@ const FiltersModal = ({ modalId }: ModalProps) => {
                             name="ageMax"
                             value={ageMax}
                             onChange={(e) => setAgeMax(e.target.value)}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full dark:bg-white dark:text-gray-900 dark:border-gray-600"
                             min={Number(ageMin) || 0}
                             placeholder="Maximum age"
                             aria-label="Maximum age"

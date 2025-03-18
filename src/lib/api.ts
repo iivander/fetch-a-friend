@@ -149,9 +149,12 @@ export const getMatchedDog = async ({ favoriteDogIds }: { favoriteDogIds: string
 
 export const fetchFavoritedDog = async (userId: string): Promise<string[]> => {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/favorites?userId=${userId}`, {
-            method: "GET",
-        });
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/favorites?userId=${userId}`,
+            {
+                method: "GET",
+            }
+        );
 
         if (!response.ok) {
             throw new Error("Failed to fetch favorite dogs");
@@ -204,5 +207,25 @@ export const deleteFavoriteDog = async (userId: string, dogId: string): Promise<
     } catch (error) {
         console.error("Error removing favorite dog:", error);
         return false;
+    }
+};
+
+export const getFavoriteDogLists = async (userId: string) => {
+    try {
+        const authToken = await getAuthToken();
+        const favoriteDogIds = await fetchFavoritedDog(userId);
+        if (favoriteDogIds.length < 1) {
+            throw new Error("Favorite Dog IDs not found");
+        }
+
+        const data = await fetchDogDetails(favoriteDogIds, authToken);
+
+        return {
+            data,
+            total: favoriteDogIds.length,
+        };
+    } catch (error) {
+        console.error("Failed to fetch dog:", error);
+        return null;
     }
 };

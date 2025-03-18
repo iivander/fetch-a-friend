@@ -32,14 +32,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                             }),
                         }
                     );
-                    console.log(res);
 
                     if (!res.ok) {
                         throw new Error("Invalid credentials");
                     }
 
                     const rawCookies = res.headers.get("set-cookie");
-                    console.log("cookies", cookies);
                     if (!rawCookies) {
                         throw new Error("No authentication token received");
                     }
@@ -80,6 +78,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 name: token.name as string | undefined,
             };
             return session;
+        },
+    },
+    events: {
+        async signOut() {
+            (await cookies()).delete("auth_token");
         },
     },
     secret: process.env.AUTH_SECRET,

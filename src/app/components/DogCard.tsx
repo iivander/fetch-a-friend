@@ -6,15 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export const DogCardSkeleton = () => (
     <div
-        className="h-[386px] card bg-base-200 shadow-lg rounded-lg overflow-hidden animate-pulse w-auto m-2"
+        className="h-[386px] card bg-base-200 shadow-lg rounded-lg overflow-hidden animate-pulse w-auto m-2 dark:bg-gray-800"
         data-testid="dog-card-skeleton"
     >
-        <div className="h-64 w-full bg-gray-300"></div>
-        <div className="w-full bg-base-300 z-10 p-4 flex flex-col gap-2">
-            <div className="h-6 w-3/4 bg-gray-300 rounded"></div>
-            <div className="h-4 w-1/2 bg-gray-300 rounded"></div>
-            <div className="h-4 w-2/3 bg-gray-300 rounded"></div>
-            <div className="h-4 w-1/3 bg-gray-300 rounded"></div>
+        <div className="h-64 w-full bg-gray-300 dark:bg-gray-700"></div>
+        <div className="w-full bg-base-300 z-10 p-4 flex flex-col gap-2 dark:bg-gray-700">
+            <div className="h-6 w-3/4 bg-gray-300 rounded dark:bg-gray-600"></div>
+            <div className="h-4 w-1/2 bg-gray-300 rounded dark:bg-gray-600"></div>
+            <div className="h-4 w-2/3 bg-gray-300 rounded dark:bg-gray-600"></div>
+            <div className="h-4 w-1/3 bg-gray-300 rounded dark:bg-gray-600"></div>
         </div>
     </div>
 );
@@ -24,17 +24,26 @@ interface DogCardProps extends Dog {
     onFavoriteClick?: (id: string) => void;
 }
 
-const DogCard = ({ id, img, name, age, breed, zip_code, isFavorite, onFavoriteClick }: DogCardProps) => {
+const DogCard = ({
+    id,
+    img,
+    name,
+    age,
+    breed,
+    zip_code,
+    isFavorite,
+    onFavoriteClick,
+}: DogCardProps) => {
     const handleDogFavoriteClick = () => {
         if (onFavoriteClick) {
             onFavoriteClick(id);
         }
-    }
+    };
 
     return (
         <div
             id={`dog-card-${id}`}
-            className="h-[386px] card bg-base-200 shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-105 w-auto m-2 relative"
+            className="h-[386px] card bg-base-200 shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl hover:scale-105 w-auto m-2 relative dark:bg-gray-800"
         >
             <div className="h-64 w-full relative overflow-hidden rounded-t-lg">
                 {img && (
@@ -48,16 +57,20 @@ const DogCard = ({ id, img, name, age, breed, zip_code, isFavorite, onFavoriteCl
                     />
                 )}
             </div>
-            <div className="w-full bg-base-300 z-10 p-4 flex flex-col gap-1">
-                <span className="font-semibold text-lg text-gray-800">{name}</span>
-                <span className="text-sm text-gray-600">Age: {age}</span>
-                <span className="text-sm text-gray-600">Breed: {breed}</span>
-                <span className="text-sm text-gray-600">Zip Code: {zip_code}</span>
+            <div className="w-full bg-base-300 z-10 p-4 flex flex-col gap-1 dark:bg-gray-700">
+                <span className="font-semibold text-lg text-gray-800 dark:text-gray-200">
+                    {name}
+                </span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">Age: {age}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">Breed: {breed}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                    Zip Code: {zip_code}
+                </span>
             </div>
             {onFavoriteClick && (
                 <button
                     onClick={handleDogFavoriteClick}
-                    className="absolute bottom-4 right-4 p-2 bg-white rounded-full shadow-lg z-[99] btn btn-circle"
+                    className="absolute bottom-4 right-4 p-2 bg-white rounded-full shadow-lg z-[99] btn btn-circle dark:bg-gray-700"
                 >
                     <AnimatePresence mode="wait">
                         {isFavorite ? (
@@ -78,7 +91,7 @@ const DogCard = ({ id, img, name, age, breed, zip_code, isFavorite, onFavoriteCl
                                 exit={{ opacity: 0, scale: 0.8 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <OutlineHeartIcon className="h-6 w-6 text-gray-400" />
+                                <OutlineHeartIcon className="h-6 w-6 text-gray-400 dark:text-gray-300" />
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -86,6 +99,6 @@ const DogCard = ({ id, img, name, age, breed, zip_code, isFavorite, onFavoriteCl
             )}
         </div>
     );
-}
+};
 
 export default DogCard;

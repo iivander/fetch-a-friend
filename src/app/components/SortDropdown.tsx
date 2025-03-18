@@ -26,8 +26,8 @@ const SortDropdown = () => {
     };
 
     return (
-        <label className="flex items-center">
-            <span className="text-sm font-semibold whitespace-nowrap mr-4">Sort By:</span>
+        <label className="flex items-center dark:text-gray-800">
+            <span className="text-sm font-semibold whitespace-nowrap mr-4 ">Sort By:</span>
             <select
                 value={currentSort}
                 onChange={handleSortChange}

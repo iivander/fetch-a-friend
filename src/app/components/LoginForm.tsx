@@ -23,6 +23,8 @@ const LoginForm = () => {
             redirect: false,
         });
 
+        console.log(response);
+
         if (!response?.error) {
             router.push("/main");
         } else {
@@ -45,7 +47,7 @@ const LoginForm = () => {
                 </h1>
                 <form onSubmit={handleSubmit}>
                     <label className="floating-label" htmlFor="login-name">
-                        <span>Name</span>
+                        <span className="dark:text-gray-200">Name</span>
                         <input
                             id="login-name"
                             type="text"
@@ -54,11 +56,11 @@ const LoginForm = () => {
                             onChange={(e) => setName(e.target.value)}
                             required
                             aria-required="true"
-                            className="input input-info w-full validator mb-4"
+                            className="input input-info w-full validator mb-4 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         />
                     </label>
                     <label className="floating-label" htmlFor="login-email">
-                        <span>Email</span>
+                        <span className="dark:text-gray-200">Email</span>
                         <input
                             id="login-email"
                             type="email"
@@ -67,7 +69,7 @@ const LoginForm = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                             aria-required="true"
-                            className="input input-info w-full validator"
+                            className="input input-info w-full validator dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         />
                     </label>
                     <p
